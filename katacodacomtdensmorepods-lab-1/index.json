@@ -23,7 +23,8 @@
   "environment": {
     "showdashboard": true,
     "uilayout": "editor-terminal",
-    "dashboards": [{ "name": "Nginx", "port": 81, "host": "host01" }],
+    "dashboard": "Dashboard",
+    /* "dashboards": [ { "name": "Nginx", "port": 81, "host": "host01" } ], */
     "uisettings": "yaml",
     "uimessage1": "\u001b[36;1mWelcome to BoxBoat training.\u001b[0m"
     },
