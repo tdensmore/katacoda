@@ -24,7 +24,7 @@ Let run an simple NGinx server. To do this in Docker we would do something like 
 
 but in Kubernetes, we run an nginx Deployment and expose the Deployment like this:
 
-`kubectl run --image=nginx nginx-app --port=80 --env="DOMAIN=cluster"`{{execute}}
+`kubectl run --image=nginx nginx-app --port=8081 --env="DOMAIN=cluster"`{{execute}}
 
 ###
 
