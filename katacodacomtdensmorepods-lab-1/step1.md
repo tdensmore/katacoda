@@ -1,6 +1,6 @@
 # Lab 1
 
-`kubeadm init --kubernetes-version $(kubeadm version -o short)`{{execute HOST1}}
+<!-- `kubeadm init --kubernetes-version $(kubeadm version -o short)`{{execute HOST1}} -->
 
 `kubectl cluster-info`
 
