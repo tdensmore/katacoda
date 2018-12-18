@@ -6,7 +6,6 @@
     "steps": [
       {
         "title": "Step 1",
-        "code": "assets/foreground.sh",
         "text": "step1.md"
       },
       {
@@ -23,8 +22,8 @@
   },
   "environment": {
     "showdashboard": true,
-    "dashboard": "Dashboard",
     "uilayout": "editor-terminal",
+    "dashboards": [{ "name": "Nginx", "port": 8081, "host": "host01" }
     "uisettings": "yaml",
     "uimessage1": "\u001b[36;1mWelcome to BoxBoat training.\u001b[0m"
     },
