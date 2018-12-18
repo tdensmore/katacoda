@@ -32,9 +32,11 @@ or this
 
 `kubectl run --image=sirile/node-image-test image-test --port=8080 --env="DOMAIN=cluster"`{{execute}}
 
+`kubectl run hello-world --image=gcr.io/google-samples/node-hello:1.0 --port=8080`{{execute}}
+
 `kubectl expose deployment image-test --port=80 --name=image-test`{{execute}}
 
-`kubectl expose deployment image-test --port 80 --name=image-test --type=LoadBalancer --target-port 8080`{{execute}}
+`kubectl expose deployment image-test --port 80 --name=image-test --target-port 8080`{{execute}}
 
 ### More stuff
 
