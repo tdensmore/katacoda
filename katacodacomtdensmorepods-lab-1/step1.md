@@ -14,29 +14,26 @@ Get information about the cluster:
 
 `kubectl get nodes`{{execute}}
 
+Notice something
+
 `kubectl get pods`{{execute}}
 
-Notiuce that there are no pods running.
+Notice that there are no pods running.
 
 ### Run a deployment
 
-Let run an simple NGinx server. To do this in Docker we would do something like this:
+Lets run an simple NGinx server. With Kubernetes, we run and expose an nginx **deployment**
+using the **run** command.
 
-`docker run -d --restart=always -e DOMAIN=cluster --name nginx-app -p 80:81 nginx`
+`kubectl run --image=nginx nginx-app --port=81`{{execute}}
 
-but in Kubernetes, we run an nginx Deployment and expose the Deployment like this:
+After runing this command, you should see the follwoing:
 
-`kubectl run --image=nginx nginx-app --port=81 --env="DOMAIN=cluster"`{{execute}}
+`deployment.apps/nginx-app created`
 
-or this
+### Expose a deployment
 
-`kubectl run --image=sirile/node-image-test image-test --port=8080 --env="DOMAIN=cluster"`{{execute}}
-
-`kubectl run hello-world --image=gcr.io/google-samples/node-hello:1.0 --port=8080`{{execute}}
-
-`kubectl expose deployment image-test --port=80 --name=image-test`{{execute}}
-
-`kubectl expose deployment image-test --port 80 --name=image-test --target-port 8080`{{execute}}
+`kubectl expose deployment nginx-app --name=nginx-app`{{execute}}
 
 ### More stuff
 
@@ -47,3 +44,9 @@ or this
 `kubectl get services`{{execute}}
 
 `curl 10.106.239.95`{{execute}}
+
+### Cleanup
+
+`kubectl delete services hello-world`{{execute}}
+
+`kubectl delete deployment hello-world`{{execute}}
