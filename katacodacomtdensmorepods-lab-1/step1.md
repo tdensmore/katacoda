@@ -28,7 +28,7 @@ but in Kubernetes, we run an nginx Deployment and expose the Deployment like thi
 
 or this
 
-`kubectl run --image=sirile/node-image-test --port=8081 --env="DOMAIN=cluster"`{{execute}}
+`kubectl run --image=sirile/node-image-test image-test --port=8081 --env="DOMAIN=cluster"`{{execute}}
 
 ### More stuff
 
