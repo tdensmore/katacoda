@@ -8,9 +8,11 @@ Check the Kubernetes version:
 
 `kubectl version --short`{{execute}}
 
-<!-- `kubectl cluster-info`
+Get information about the cluster:
 
-`kubectl get nodes` -->
+`kubectl cluster-info`{{execute}}
+
+`kubectl get nodes`{{execute}}
 
 `kubectl get pods`{{execute}}
 
@@ -28,12 +30,18 @@ but in Kubernetes, we run an nginx Deployment and expose the Deployment like thi
 
 or this
 
-`kubectl run --image=sirile/node-image-test image-test --port=80 --env="DOMAIN=cluster"`{{execute}}
+`kubectl run --image=sirile/node-image-test image-test --port=8080 --env="DOMAIN=cluster"`{{execute}}
 
 `kubectl expose deployment image-test --port=80 --name=image-test`{{execute}}
 
+`kubectl expose deployment image-test --port 80 --name=image-test --type=LoadBalancer --target-port 8080`{{execute}}
+
 ### More stuff
 
-`kubectl get rs`
+`kubectl get rs`{{execute}}
 
 `kubectl get deployments`{{execute}}
+
+`kubectl get services`{{execute}}
+
+`curl 10.106.239.95`{{execute}}
