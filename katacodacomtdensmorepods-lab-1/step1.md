@@ -43,7 +43,7 @@ NAME      READY     STATUS    RESTARTS   AGE
 nginx     1/1       Running   0          27s
 ```
 
-##### Explore a Kubernetes Pod
+## Explore a Kubernetes Pod
 
 `kubectl describe pod nginx`{{execute}}
 
