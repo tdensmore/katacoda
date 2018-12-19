@@ -43,7 +43,7 @@ NAME      READY     STATUS    RESTARTS   AGE
 nginx     1/1       Running   0          27s
 ```
 
-## Explore a Kubernetes Pod
+##### Explore a Kubernetes Pod
 
 `kubectl describe pod nginx`{{execute}}
 
@@ -51,7 +51,7 @@ To get the IP address of the NGiNX pod, use this command:
 
 `kubectl describe pod nginx | grep IP | awk '{print $2}'`{{execute}}
 
-#### Logs
+##### Logs
 
 View the internal container logs of the NGiNX pod:
 
@@ -87,6 +87,8 @@ Now we can remove the running NGiNX pod with the command:
 We can now verify that the NGiNX pod has been deleted:
 
 `kubectl get pods`{{execute}}
+
+You should see a message confirming that there are no running pods:
 
 ```
 No resources found.
