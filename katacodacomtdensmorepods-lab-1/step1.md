@@ -36,14 +36,20 @@ You should see a running pod similar to this: `nginx-app-55d5c46f74-XXXXX`
 
 NOTE: it may take a few seconds for the pod `STATUS` to change from **ContainerCreating** to **Running**.
 
-## Launch Kubernetes Pods
+## Delete Kubernetes Pods
 
-Now we can remove the runnig pod with the command:
+Now we can remove the running pod with the command:
 
-`kubectl delete pod nginx-app --now `{{execute}}
+`kubectl delete pod $(kubectl get pods | grep nginx) --now`{{execute}}
 
 We can now verify that the NGiNX pod has been deleted:
 
-To see if any **pods** are currently running:
-
 `kubectl get pods`{{execute}}
+
+Wait! Why is the pod is still running?
+
+Answer: When NGiNX was started, Kubernetes created a [deploynment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/). a **deplopyment** helps Kubernetes keep resources available. Kubernetes started a new pod when it realized the NGiNX pod had died.
+
+To really kill the NGiNX pod, we need to delete the **deployment** with the command:
+
+`kubectl delete deployment nginx-app`{{execute}}
