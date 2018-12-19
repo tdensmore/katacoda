@@ -76,9 +76,7 @@ You are now logged into the running NGiNX container. Poke around and examine the
 
 `ls -al`{{execute}}
 
-When you are done, exit the container:
-
-`exit`{{execute}}
+When you are done, exit the container by typing `exit`.
 
 ## Delete a Kubernetes Pod
 
