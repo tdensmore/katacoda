@@ -38,9 +38,12 @@ NOTE: it may take a few seconds for the pod `STATUS` to change from **ContainerC
 
 ## Delete Kubernetes Pods
 
-Now we can remove the running pod with the command:
+Now we can remove the running NGiNX pod with the command:
 
-`kubectl delete pod $(kubectl get pods | grep nginx) --now`{{execute}}
+`kubectl delete pod "$(kubectl get pods | awk '{print $1}' | grep nginx)" --now`{{execute}}
+
+NOTE: Since the pod names are dynamic and unique, this command return the current NGiNX pod name:
+`$(kubectl get pods | awk '{print $1}' | grep nginx)`
 
 We can now verify that the NGiNX pod has been deleted:
 
