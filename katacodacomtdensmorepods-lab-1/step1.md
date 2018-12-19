@@ -1,6 +1,4 @@
-# Luanching a new Kubernetes Pod
-
-### Explore the Kubernetes cluster
+## Explore the Kubernetes cluster
 
 Check the Kubernetes version:
 
@@ -12,13 +10,15 @@ Lets see what our cluster looks like.
 
 We should have 2 nodes running: **master** and **node1**.
 
-### Kubernetes Pods
+## List Kubernetes Pods
 
 To see if any **pods** are currently running:
 
 `kubectl get pods`{{execute}}
 
 The `No resources found.` message means that there are no pods running.
+
+## Launch Kubernetes Pods
 
 Lets start a pod by deploying a new NGiNX container using the **run** command.
 
@@ -36,6 +36,14 @@ You should see a running pod similar to this: `nginx-app-55d5c46f74-XXXXX`
 
 NOTE: it may take a few seconds for the pod `STATUS` to change from **ContainerCreating** to **Running**.
 
+## Launch Kubernetes Pods
+
 Now we can remove the runnig pod with the command:
 
 `kubectl delete pod nginx-app --now `{{execute}}
+
+We can now verify that the NGiNX pod has been deleted:
+
+To see if any **pods** are currently running:
+
+`kubectl get pods`{{execute}}
