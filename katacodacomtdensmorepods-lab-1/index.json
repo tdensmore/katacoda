@@ -17,7 +17,14 @@
         "text": "step3.md"
       }
     ],
-    "intro": { "text": "intro.md" },
+    "intro": { "text": "intro.md", "credits": "www.boxboat.com" },
+    "assets": {
+    "client": [
+      {
+        "file": "pod.yaml",
+        "target": "~/"
+      }
+    ],
     "finish": { "text": "finish.md" }
   },
   "environment": {

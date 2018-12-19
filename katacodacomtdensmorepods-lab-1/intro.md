@@ -1,5 +1,9 @@
 # Kubernetes - Pods
 
+## What is a pod ?
+
+The https://kubernetes.io/docs/concepts/workloads/pods/pod/#what-is-a-pod[Kubernetes Pod] page says:
+
 Pods are groups of 1 or more containers:
 
 * that share storage / network configurations
@@ -9,4 +13,4 @@ Pods are groups of 1 or more containers:
 * whose containers communicate over localhost
 * that are emphemeral
 
-These labs will let you inspsect pod configurations, riunning containers and networking.
+This labs will let you inspsect pod configurations, running containers and networking.

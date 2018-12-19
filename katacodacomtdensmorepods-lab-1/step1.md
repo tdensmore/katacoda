@@ -1,52 +1,42 @@
-# Lab 1
+# Luanching a new Kubernetes Pod
 
-<!-- `kubeadm init --kubernetes-version $(kubeadm version -o short)`{{execute HOST1}} -->
-
-### Kubernetes
+### Explore the Kubernetes cluster
 
 Check the Kubernetes version:
 
 `kubectl version --short`{{execute}}
 
-Get information about the cluster:
-
-`kubectl cluster-info`{{execute}}
+Lets see what our cluster looks like.
 
 `kubectl get nodes`{{execute}}
 
-Notice something
+We should have 2 nodes running: **master** and **node1**.
+
+### Kubernetes Pods
+
+To see if any **pods** are currently running:
 
 `kubectl get pods`{{execute}}
 
-Notice that there are no pods running.
+Notice that there are no pods running ("No resources found.").
 
-### Run a deployment
+Lets start one by deploying a new NGiNX container.
 
 Lets run an simple NGinx server. With Kubernetes, we run and expose an nginx **deployment**
 using the **run** command.
 
 `kubectl run --image=nginx nginx-app --port=81`{{execute}}
 
-After runing this command, you should see the follwoing:
+After runing this command, you should see the following:
 
 `deployment.apps/nginx-app created`
 
-### Expose a deployment
+Now notice that a new pod has been created:
 
-`kubectl expose deployment nginx-app --name=nginx-app`{{execute}}
+`kubectl get pods`{{execute}}
 
-### More stuff
+You should see a running pod similar to this: `nginx-app-55d5c46f74-XXXXX`
 
-`kubectl get rs`{{execute}}
+Now we can remove the runnig pod with the command:
 
-`kubectl get deployments`{{execute}}
-
-`kubectl get services`{{execute}}
-
-`curl 10.106.239.95`{{execute}}
-
-### Cleanup
-
-`kubectl delete services hello-world`{{execute}}
-
-`kubectl delete deployment hello-world`{{execute}}
+`kubectl delete pod nginx-app --now `{{execute}}
