@@ -18,64 +18,78 @@ To see if any **pods** are currently running:
 
 The `No resources found.` message means that there are no pods running.
 
-## Launch Kubernetes Pods
+## Launch a Kubernetes Pod
 
-Lets start a pod by deploying a new NGiNX container using the **run** command.
+Generally you will want to launch pods into your K8S cluster from a file, since
+infrastructure as code promotes transparency and reproducibily.
 
-`kubectl run --image=nginx nginx-app --port=81`{{execute}}
+Examine the `pod.yaml` file in the resource browser.
 
-After runing this command, you should see the following:
+Launch a new pod in Kubernetes
+using the command: Lets start a pod by deploying a new NGiNX container using the **create** command.
 
-`deployment.apps/nginx-app created`
+`kubectl create -f ./pod.yaml`{{execute}}
 
-Now notice that a new pod has been created:
+Verify that the new NGiNX pod is running:
 
 `kubectl get pods`{{execute}}
 
-You should see a running pod similar to this: `nginx-app-55d5c46f74-XXXXX`
+It may take a few seconds for the pod `STATUS` to change from **ContainerCreating** to **Running**.
 
-NOTE: it may take a few seconds for the pod `STATUS` to change from **ContainerCreating** to **Running**.
+You should see output similar to this:
 
-## Delete Kubernetes Pods
+```
+NAME      READY     STATUS    RESTARTS   AGE
+nginx     1/1       Running   0          27s
+```
+
+## Explore a Kubernetes Pod
+
+`kubectl describe pod nginx`{{execute}}
+
+To get the IP address of the NGiNX pod, use this command:
+
+`kubectl describe pod nginx | grep IP | awk '{print $2}'`{{execute}}
+
+#### Logs
+
+View the internal container logs of the NGiNX pod:
+
+`kubectl logs nginx`{{execute}}
+
+Notice that logfile is empty because NGiNX has served no requests.
+To create a log entry, lets request something from NGiNX using the `curl` command:
+
+`curl $(kubectl describe pod nginx | grep IP | awk '{print $2}')`{{execute}}
+
+Now lets look at the logs again:
+
+`kubectl logs nginx`{{execute}}
+
+Notice the new log entry.
+
+##### Log into the pod
+
+`kubectl exec -ti nginx bash`{{execute}}
+
+You are now logged into the running NGiNX container. Poke around and examine the container:
+
+`ls -al`{{execute}}
+
+When you are done, exit the container:
+
+`exit`{{execute}}
+
+## Delete a Kubernetes Pod
 
 Now we can remove the running NGiNX pod with the command:
 
-`kubectl delete pod "$(kubectl get pods | awk '{print $1}' | grep nginx)" --now`{{execute}}
-
-NOTE: Since the pod names are dynamic and unique, this command return the current NGiNX pod name:
-`$(kubectl get pods | awk '{print $1}' | grep nginx)`
+`kubectl delete pod nginx`{{execute}}
 
 We can now verify that the NGiNX pod has been deleted:
 
 `kubectl get pods`{{execute}}
 
 ```
-NAME                         READY     STATUS    RESTARTS   AGE
-nginx-app-55d5c46f74-XXXXX   1/1       Running   0          13s
+No resources found.
 ```
-
-Wait! Why is the pod is still running?
-
-Answer: When NGiNX was started, Kubernetes created a [deploynment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/). a **deplopyment** helps Kubernetes keep resources available. Kubernetes started a new pod when it realized the NGiNX pod had died.
-
-Verify the running deployment with the command:
-
-`kubectl get deployments`{{execute}}
-
-## Delete Kubernetes Deployments
-
-To really delete the NGiNX pod, we need to delete the **deployment** with the command:
-
-`kubectl delete deployment nginx-app`{{execute}}
-
-You should see this message:
-
-`deployment.extensions "nginx-app" deleted`
-
-Verify this deleted the deployment:
-
-`kubectl get deployments`{{execute}}
-
-And verify this really deleted the pod, too.
-
-`kubectl get pods`{{execute}}

@@ -5,15 +5,15 @@
   "details": {
     "steps": [
       {
-        "title": "Step 1",
+        "title": "Kubernetes: Simple Pods",
         "text": "step1.md"
       },
       {
-        "title": "Step 2",
+        "title": "Kubernetes: Multi-container Pods",
         "text": "step2.md"
       },
       {
-        "title": "Step 3",
+        "title": "Kubernetes: Pod networking",
         "text": "step3.md"
       }
     ],
