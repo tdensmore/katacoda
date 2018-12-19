@@ -62,9 +62,15 @@ Verify the running deployment with the command:
 
 `kubectl get deployments`{{execute}}
 
-To really kill the NGiNX pod, we need to delete the **deployment** with the command:
+## Delete Kubernetes Deployments
+
+To really delete the NGiNX pod, we need to delete the **deployment** with the command:
 
 `kubectl delete deployment nginx-app`{{execute}}
+
+You should see this message:
+
+`deployment.extensions "nginx-app" deleted`
 
 Verify this deleted the deployment:
 
