@@ -49,10 +49,27 @@ We can now verify that the NGiNX pod has been deleted:
 
 `kubectl get pods`{{execute}}
 
+```
+NAME                         READY     STATUS    RESTARTS   AGE
+nginx-app-55d5c46f74-XXXXX   1/1       Running   0          13s
+```
+
 Wait! Why is the pod is still running?
 
 Answer: When NGiNX was started, Kubernetes created a [deploynment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/). a **deplopyment** helps Kubernetes keep resources available. Kubernetes started a new pod when it realized the NGiNX pod had died.
 
+Verify the running deployment with the command:
+
+`kubectl get deployments`{{execute}}
+
 To really kill the NGiNX pod, we need to delete the **deployment** with the command:
 
 `kubectl delete deployment nginx-app`{{execute}}
+
+Verify this deleted the deployment:
+
+`kubectl get deployments`{{execute}}
+
+And verify this really deleted the pod, too.
+
+`kubectl get pods`{{execute}}
