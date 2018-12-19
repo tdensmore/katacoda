@@ -18,12 +18,9 @@ To see if any **pods** are currently running:
 
 `kubectl get pods`{{execute}}
 
-Notice that there are no pods running ("No resources found.").
+The `No resources found.` message means that there are no pods running.
 
-Lets start one by deploying a new NGiNX container.
-
-Lets run an simple NGinx server. With Kubernetes, we run and expose an nginx **deployment**
-using the **run** command.
+Lets start a pod by deploying a new NGiNX container using the **run** command.
 
 `kubectl run --image=nginx nginx-app --port=81`{{execute}}
 
@@ -36,6 +33,8 @@ Now notice that a new pod has been created:
 `kubectl get pods`{{execute}}
 
 You should see a running pod similar to this: `nginx-app-55d5c46f74-XXXXX`
+
+NOTE: it may take a few seconds for the pod `STATUS` to change from **ContainerCreating** to **Running**.
 
 Now we can remove the runnig pod with the command:
 
