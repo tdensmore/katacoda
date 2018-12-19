@@ -1,7 +1,7 @@
 {
-  "title": "Pods - Lab 1",
+  "title": "Kubernetes Pods",
   "icon": "fa-kubernetes",
-  "description": "Understanding Kubernetes Pods",
+  "description": "Kubernetes Pods",
   "details": {
     "steps": [
       {
