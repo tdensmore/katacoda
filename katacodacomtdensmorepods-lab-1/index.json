@@ -22,7 +22,7 @@
     {
       "client": [
         {"file": "single-pod.yaml", "target": "~/"},
-        {"file": "mutli-pod.yaml", "target": "~/"}
+        {"file": "multi-pod.yaml", "target": "~/"}
       ]
     },
     "finish": { "text": "finish.md" }
