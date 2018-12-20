@@ -25,6 +25,9 @@ infrastructure as code promotes transparency and reproducibily.
 
 Examine the `single-pod.yaml` file in the resource browser.
 
+NOTE: If you receive this message: `error: the path "./single-pod.yaml" does not exist`, click
+on the file `single-pod.yaml` in the explorer window above the terminal window to the right of this pane.
+
 Launch a new pod in Kubernetes
 using the command: Lets start a pod by deploying a new NGiNX container using the **create** command.
 
@@ -82,7 +85,7 @@ When you are done, exit the container by typing `exit`.
 
 Now we can remove the running NGiNX pod using the YAML file:
 
-`kubectl delete -f ./pod.json`{{execute}}
+`kubectl delete -f ./single-pod.yaml`{{execute}}
 
 or directly with this command:
 
