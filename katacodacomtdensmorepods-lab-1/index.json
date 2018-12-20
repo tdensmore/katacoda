@@ -21,8 +21,8 @@
     "assets":
     {
       "client": [
-        {"file": "single-pod.yaml", "target": "~/"},
-        {"file": "multi-pod.yaml", "target": "~/"}
+        {"file": "single-container.yaml", "target": "~/"},
+        {"file": "multi-container.yaml", "target": "~/"}
       ]
     },
     "finish": { "text": "finish.md" }
