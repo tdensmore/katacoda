@@ -1,2 +1,2 @@
 # launch.sh
-minikube start
+#minikube start

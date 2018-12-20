@@ -23,12 +23,12 @@ The `No resources found.` message means that there are no pods running.
 Generally you will want to launch pods into your K8S cluster from a file, since
 infrastructure as code promotes transparency and reproducibily.
 
-Examine the `pod.yaml` file in the resource browser.
+Examine the `single-pod.yaml` file in the resource browser.
 
 Launch a new pod in Kubernetes
 using the command: Lets start a pod by deploying a new NGiNX container using the **create** command.
 
-`kubectl create -f ./pod.yaml`{{execute}}
+`kubectl create -f ./single-pod.yaml`{{execute}}
 
 Verify that the new NGiNX pod is running:
 
@@ -51,7 +51,7 @@ To get the IP address of the NGiNX pod, use this command:
 
 `kubectl describe pod nginx | grep IP | awk '{print $2}'`{{execute}}
 
-##### Logs
+##### View pod logs
 
 View the internal container logs of the NGiNX pod:
 
@@ -80,7 +80,11 @@ When you are done, exit the container by typing `exit`.
 
 ## Delete a Kubernetes Pod
 
-Now we can remove the running NGiNX pod with the command:
+Now we can remove the running NGiNX pod using the YAML file:
+
+`kubectl delete -f ./pod.json`{{execute}}
+
+or directly with this command:
 
 `kubectl delete pod nginx`{{execute}}
 
@@ -93,3 +97,9 @@ You should see a message confirming that there are no running pods:
 ```
 No resources found.
 ```
+
+## Summary
+
+We learned about Kubernetes Pods: how to create them, interact with them, and remove them.
+
+In the next lesson, we will explore multi-container pods.
