@@ -20,18 +20,20 @@ The `No resources found.` message means that there are no pods running.
 
 ## Launch a Kubernetes Pod
 
+Examine the `single-container.yaml` file in the resource browser.
+
+This file specifies a very simple NGiNX container.
+
 Generally you will want to launch pods into your K8S cluster from a file, since
 infrastructure as code promotes transparency and reproducibily.
 
-Examine the `single-container.yaml` file in the resource browser.
-
-NOTE: If you receive this message: `error: the path "./single-container.yaml" does not exist`, click
-on the file `single-container.yaml` in the explorer window above the terminal window to the right of this pane.
-
-Launch a new pod in Kubernetes
-using the command: Lets start a pod by deploying a new NGiNX container using the **create** command.
+Deploy a new NGiNX container using the **create** command:
 
 `kubectl create -f ./single-container.yaml`{{execute}}
+
+NOTE: If you receive this message: `error: the path "./single-container.yaml" does not exist`, click
+on the file `single-container.yaml` in the explorer window above the terminal window
+to the right of this pane, then retry the command.
 
 Verify that the new NGiNX pod is running:
 

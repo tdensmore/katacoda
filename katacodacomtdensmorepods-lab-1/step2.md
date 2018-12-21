@@ -5,8 +5,6 @@ However, some container patterns (sidecar, adapter and ambassador) require more 
 
 The **sidecar** container pattern is a very common practice for logging utilities, sync services, watchers, and monitoring agents.
 
-Open the `multi-po`
-
 ## Launch a Multi-Container Pod
 
 Generally you will want to launch pods into your K8S cluster from a file, since
@@ -14,15 +12,18 @@ infrastructure as code promotes transparency and reproducibily.
 
 Examine the `multi-container.yaml` file in the resource browser.
 
-NOTE: If you receive this message: `error: the path "./single-pod.yaml" does not exist`, click
-on the file `single-pod.yaml` in the explorer window above the terminal window to the right of this pane.
+This file specifies a simple Alpine Linux container and an NGiNX container.
+
+NOTE: If you receive this message: `error: the path "./multi-container.yaml" does not exist`, click
+on the file `multi-container.yaml` in the explorer window above the terminal window
+to the right of this pane, then retry the command.
 
 Launch a new pod in Kubernetes
 using the command: Lets start a pod by deploying a new NGiNX container using the **create** command.
 
-`kubectl create -f ./single-pod.yaml`{{execute}}
+`kubectl create -f ./multi-container.yaml`{{execute}}
 
-Verify that the new NGiNX pod is running:
+Verify that the new `pod-with-sidecar` pod is running:
 
 `kubectl get pods`{{execute}}
 
