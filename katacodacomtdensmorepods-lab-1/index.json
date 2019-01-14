@@ -15,7 +15,7 @@
         "text": "step2.md"
       },
       {
-        "title": "Kubernetes: Pod networking",
+        "title": "Kubernetes: Pod to Pod networking",
         "text": "step3.md"
       }
     ],
@@ -26,7 +26,7 @@
     },
     "assets":
     {
-      "client": [
+      "host01": [
         {"file": "single-container.yaml", "target": "~/"},
         {"file": "multi-container.yaml", "target": "~/"}
       ]

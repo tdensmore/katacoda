@@ -1,24 +1,11 @@
-## Multi-Container Pods
 
-
-#### Communication between Pods
-
-#### Shared Volumes
-
-In Kubernetes, you can use a shared Kubernetes Volume as a simple and efficient
-way to share data between containers in a Pod. For most cases, it is sufficient
-to use a directory on the host that is shared with all containers within a Pod.
-
-Kubernetes Volumes enables data to survive container restarts, but these volumes have the same lifetime as the Pod. That means that the volume (and the data it holds) exists exactly as long as that Pod exists. If that Pod is deleted for any reason, even if an identical replacement is created, the shared Volume is also destroyed and created anew.
-
-A standard use case for a multi-container Pod with a shared Volume is when one container writes logs or other files to the shared directory, and the other container reads from the shared directory. For example, we can create a Pod like so:
 
 To this point we have been working with a pod hosting a single container.
-However, some container patterns (sidecar, adapter and ambassador) require more than one running container.
+However, some container patterns (sidecar, adapter and ambassador) require more
+than one running container.
 
-#### IPC
-
-The **sidecar** container pattern is a very common practice for logging utilities, sync services, watchers, and monitoring agents.
+NOTE: the **sidecar** container pattern is a very common practice for logging
+utilities, sync services, watchers, and monitoring agents.
 
 ## Launch a Multi-Container Pod
 
@@ -28,9 +15,7 @@ infrastructure as code promotes transparency and reproducibily.
 Examine the `multi-container.yaml` file in the resource browser.
 
 This file specifies a simple Alpine Linux container and an NGiNX container.
-
-Launch a new pod in Kubernetes
-using the command: Lets start a pod by deploying a new NGiNX container using the **create** command.
+Start a pod by deploying a new NGiNX container using the **create** command.
 
 `kubectl create -f ./multi-container.yaml`{{execute}}
 
@@ -51,63 +36,84 @@ NAME               READY     STATUS    RESTARTS   AGE
 pod-with-sidecar   2/2       Running   0          15s
 ```
 
-## Explore a Kubernetes Pod
+## Label the Pod
 
-`kubectl describe pod nginx`{{execute}}
+One or more labels can be applied to a pod. Apply a label to the sidecar pod:
 
-To get the IP address of the NGiNX pod, use this command:
+`kubectl label pods pod-with-sidecar containers=2`{{execute}}
 
-`kubectl describe pod nginx | grep IP | awk '{print $2}'`{{execute}}
+To show labels on a pod, use the following command:
 
-##### View pod logs
+`kubectl get pods --show-labels`{{execute}}
 
-View the internal container logs of the NGiNX pod:
+## List all containers running in a pod
 
-`kubectl logs nginx`{{execute}}
+To show the container names associated with the pod labelled "containers=2":
 
-Notice that logfile is empty because NGiNX has served no requests.
-To create a log entry, lets request something from NGiNX using the `curl` command:
+`kubectl get pods -l containers=2 -o jsonpath={.items[*].spec.containers[*].name}`{{execute}}
 
-`curl $(kubectl describe pod nginx | grep IP | awk '{print $2}')`{{execute}}
+You should see the following container names:
 
-Now lets look at the logs again:
+* app-container
+* sidecar-container
 
-`kubectl logs nginx`{{execute}}
+## Communication between Containers in a Pod
 
-Notice the new log entry.
+#### Shared Volumes
 
-##### Log into the pod
+In Kubernetes, you can use a shared Kubernetes Volume as a simple and efficient
+way to share data between containers in a Pod. For most cases, it is sufficient
+to use a directory on the host that is shared with all containers within a Pod.
 
-`kubectl exec -ti nginx bash`{{execute}}
+Kubernetes Volumes enables data to survive container restarts, but these volumes have the same lifetime as the Pod. That means that the volume (and the data it holds) exists exactly as long as that Pod exists. If that Pod is deleted for any reason, even if an identical replacement is created, the shared Volume is also destroyed and created anew.
 
-You are now logged into the running NGiNX container. Poke around and examine the container:
+A standard use case for a multi-container Pod with a shared Volume is when one container writes logs or other files to the shared directory, and the other container reads from the shared directory.
 
-`ls -al`{{execute}}
+Examine the file "pod-volume.yaml" in the file explorer.
 
-When you are done, exit the container by typing `exit`.
+The 1st container runs nginx server and has the shared volume mounted to the
+directory ``/usr/share/nginx/html`.
 
-## Delete a Kubernetes Pod
+The 2nd container uses a Debian image and mountes the shared volume to the
+container directory `/html`.
 
-Now we can remove the running NGiNX pod using the YAML file:
+Every second, the 2nd container adds the current date and time into the
+`index.html` file, which is located in the shared volume. When the user makes
+an HTTP request to the Pod, the Nginx server reads this file and transfers it
+back to the user in response to the request.
 
-`kubectl delete -f ./single-pod.yaml`{{execute}}
+`kubectl create -f ./pod-volume.yaml`{{execute}}
 
-or directly with this command:
+#### IPC
 
-`kubectl delete pod nginx`{{execute}}
+Containers in a Pod share the same IPC namespace, which means they can also
+communicate with each other using standard inter-process communications such
+as SystemV semaphores or POSIX shared memory.
 
-We can now verify that the NGiNX pod has been deleted:
+Examine the file "pod-volume.yaml" in the file explorer.
 
-`kubectl get pods`{{execute}}
+The first container, producer, creates a standard Linux message queue, writes a
+number of random messages, and then writes a special exit message. The second
+container,  consumer, opens that same message queue for reading and reads
+messages until it receives the exit message.
 
-You should see a message confirming that there are no running pods:
+Run the example:
 
-```
-No resources found.
-```
+`kubectl create -f ./pod-ipc.yaml`{{execute}}
+
+When the pod is running check the logs of each container:
+
+`kubectl logs pod-ipc -c producer`{{execute}}
+
+`kubectl logs pod-ipc -c consumer`{{execute}}
+
+Delete the pod when you are done:
+
+`kubectl delete -f ./pod-ipc.yaml`{{execute}}
 
 ## Summary
 
-We learned about Kubernetes Pods: how to create them, interact with them, and remove them.
+We explored multi-container Kubernetes Pods, and explored container
+communication within a pod.
 
-In the next lesson, we will explore multi-container pods.
+In the next lesson, we will explore multi-pod communication.
