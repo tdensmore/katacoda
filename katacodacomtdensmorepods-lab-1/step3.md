@@ -18,8 +18,11 @@ Now SSH into this container to verify we can `see` the NGINX server:
 
 `kubectl exec -it alpine sh`{{execute}}
 
-then curl the NGINX pod:
+NOTE: If you receive an error similare to: `error: unable to upgrade connection: container not found ("nginx")`
+just wait a few more seconds for the container to start up properly.
+
+Next curl the remote NGINX pod:
 
 `curl -I server `{{execute}}
 
-You should receive a response: `HTTP/1.1 200 OK`
+You should receive a response similar to: `HTTP/1.1 200 OK`
