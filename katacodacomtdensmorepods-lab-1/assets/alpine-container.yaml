@@ -8,3 +8,7 @@ spec:
   containers:
   - name: nginx
     image: alpine
+    command:
+      - /bin/sh
+      - "-c"
+      - "sleep 60m"
