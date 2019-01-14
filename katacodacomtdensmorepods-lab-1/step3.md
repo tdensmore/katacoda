@@ -16,7 +16,7 @@ Now create another different pod:
 
 Now SSH into this container to verify we can `see` the NGINX server:
 
-`kubectl exec -it alpine bash`{{execute}}
+`kubectl exec -it alpine sh`{{execute}}
 
 then curl the NGINX pod:
 
