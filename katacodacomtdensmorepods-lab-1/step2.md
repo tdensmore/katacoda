@@ -72,7 +72,7 @@ A standard use case for a multi-container Pod with a shared Volume is when one c
 Examine the file "pod-volume.yaml" in the file explorer.
 
 The 1st container runs nginx server and has the shared volume mounted to the
-directory ``/usr/share/nginx/html`.
+directory `/usr/share/nginx/html`.
 
 The 2nd container uses a Debian image and mountes the shared volume to the
 container directory `/html`.
@@ -83,6 +83,16 @@ an HTTP request to the Pod, the Nginx server reads this file and transfers it
 back to the user in response to the request.
 
 `kubectl create -f ./pod-volume.yaml`{{execute}}
+
+We can check that both containers can `see` the same file:
+
+`kubectl exec shared-volume -c nginx -- /bin/cat /usr/share/nginx/html/index.html`{{execute}}
+
+`kubectl exec shared-volume -c debian -- /bin/cat /html/index.html`{{execute}}
+
+Delete the pod resources when you are done:
+
+`kubectl delete -f ./pod-volume.yaml`{{execute}}
 
 #### IPC
 
