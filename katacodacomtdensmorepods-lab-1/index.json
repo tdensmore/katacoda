@@ -28,6 +28,7 @@
     {
       "host01": [
         {"file": "single-container.yaml", "target": "~/"},
+        {"file": "alpine-container.yaml", "target": "~/"},
         {"file": "multi-container.yaml", "target": "~/"},
         {"file": "pod-volume.yaml", "target": "~/"},
         {"file": "pod-ipc.yaml", "target": "~/"}
