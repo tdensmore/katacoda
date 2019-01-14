@@ -111,7 +111,9 @@ Run the example:
 
 `kubectl create -f ./pod-ipc.yaml`{{execute}}
 
-When the pod is running check the logs of each container:
+NOTE: These pods will show a COMPLETED status after running. They are not long lived.
+
+Verify these pods were able to communicate by checking the logs of each container:
 
 `kubectl logs pod-ipc -c producer`{{execute}}
 
