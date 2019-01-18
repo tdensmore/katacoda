@@ -1,2 +1,2 @@
 
-![BoxBoat Logo](./assets/resources/boxboat.png)
+![BoxBoat Logo](/resources/boxboat.png)
