@@ -36,7 +36,7 @@
         {"file": "multi-container.yaml", "target": "~/"},
         {"file": "pod-volume.yaml", "target": "~/"},
         {"file": "pod-ipc.yaml", "target": "~/"},
-        {"file": "boxboat.png", "target": "~/resources"}
+        {"file": "boxboat.png", "target": "/resources"}
       ]
     },
     "finish": {
