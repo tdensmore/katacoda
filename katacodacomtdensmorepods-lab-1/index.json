@@ -17,6 +17,10 @@
       {
         "title": "Kubernetes: Pod to Pod networking",
         "text": "step3.md"
+      },
+      {
+        "title": "Kubernetes: Test your Pod knowledge",
+        "text": "step4.md"
       }
     ],
     "intro": {
