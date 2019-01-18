@@ -1,16 +1,19 @@
-In ours earlier Pods lab, we
+In ours earlier Pods lab, we explored running pods. Pods are very useful for
+providing structure to containers, but if a pod fails it will not be restarted.
+
+To remedy this, Kubernetes created an object called a `Deployment`. Deployments
+are specifications for running one or more pods, and methods to **keep them running**.
 
 To run a Kubernetes deployment from the command-line:
 
 `kubectl run nginx --image=nginx --port 80`{{execute}}
 
-You just deployed your first application by creating a deployment.
+Congrats, you have just created your first pod deployment. The `run` command
+automatically performed a few things for you:
 
-This command automatically performed a few things for you:
-
-* it searched for a suitable node where to run the application (although we have only 1 available node)
-* it scheduled the application to run on that Node
-* it configured the cluster to reschedule the instance on a new Node when needed
+* it searched for a suitable node to run the pod
+* it scheduled the pod to run on that Node
+* it configured the cluster to restart / reschedule the pod when needed
 
 To verify that the command created a deployment:
 
