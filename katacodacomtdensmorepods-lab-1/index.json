@@ -35,6 +35,7 @@
       ]
     },
     "finish": {
+      "title": "Kubernetes: Test your Pod knowledge",
       "text": "finish.md"
     }
   },
